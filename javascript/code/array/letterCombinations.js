@@ -11,35 +11,35 @@
 
 // 方法一:
 // 思路: reducer
-// const dict = {
-//   2: ['a', 'b', 'c'],
-//   3: ['d', 'e', 'f'],
-//   4: ['g', 'h', 'i'],
-//   5: ['j', 'k', 'l'],
-//   6: ['m', 'n', 'o'],
-//   7: ['p', 'q', 'r', 's'],
-//   8: ['t', 'u', 'v'],
-//   9: ['w', 'x', 'y', 'z']
-// }
-// const combine = (preList, curList) => {
-//   let res = []
-//   for (let i = 0, lenL1 = preList.length; i < lenL1; i++) {
-//     for (let j = 0, lenL2 = curList.length; j < lenL2; j++) {
-//       res.push(preList[i] + curList[j])
-//     }
-//   }
-//   return res
-// }
-// const letterCombinations = (digits) => {
-//   if (!digits) {
-//     return []
-//   }
-//   const arr = digits.split('').map(el => dict[el])
-//   return arr.reduce((ac, cur) => {
-//     ac = combine(ac, cur)
-//     return ac
-//   })
-// };
+const dict = {
+  2: ['a', 'b', 'c'],
+  3: ['d', 'e', 'f'],
+  4: ['g', 'h', 'i'],
+  5: ['j', 'k', 'l'],
+  6: ['m', 'n', 'o'],
+  7: ['p', 'q', 'r', 's'],
+  8: ['t', 'u', 'v'],
+  9: ['w', 'x', 'y', 'z']
+}
+const combine = (preList, curList) => {
+  let res = []
+  for (let i = 0, lenL1 = preList.length; i < lenL1; i++) {
+    for (let j = 0, lenL2 = curList.length; j < lenL2; j++) {
+      res.push(preList[i] + curList[j])
+    }
+  }
+  return res
+}
+const letterCombinations = (digits) => {
+  if (!digits) {
+    return []
+  }
+  const arr = digits.split('').map(el => dict[el])
+  return arr.reduce((ac, cur) => {
+    ac = combine(ac, cur)
+    return ac
+  })
+};
 
 // 方法二:
 // ['abc', 'def', 'ghi',]展开

@@ -20,68 +20,68 @@
 
 // 思路二
 
-// const matchSubStri = (s, i) => {
-//   let len = s.length
-//   let c0 = 0
-//   let c1 = 0
-//   let changeCount = 0 // 变化的次数
-//   let last = s[i]  // 上一个数
-//   for (; i < len; i++) {
-//     let current = s[i]  // 当前的数
-//     if (current == 0) {
-//       ++c0
-//     } else {
-//       ++c1
-//     }
-//     if (last != current) { // 0或1改变
-//       ++changeCount
-//     }
-//     if (changeCount >= 2) { // 再次变化说明从开头的子串不符合
-//       return false
-//     }
-//     if (changeCount && c0 == c1) { // 第一次变化, 并且0和1的个数相同
-//       return true
-//     }
-//     last = current
-//   }
-//   return false
-// }
+const matchSubStri = (s, i) => {
+  let len = s.length
+  let c0 = 0
+  let c1 = 0
+  let changeCount = 0 // 变化的次数
+  let last = s[i]  // 上一个数
+  for (; i < len; i++) {
+    let current = s[i]  // 当前的数
+    if (current == 0) {
+      ++c0
+    } else {
+      ++c1
+    }
+    if (last != current) { // 0或1改变
+      ++changeCount
+    }
+    if (changeCount >= 2) { // 再次变化说明从开头的子串不符合
+      return false
+    }
+    if (changeCount && c0 == c1) { // 第一次变化, 并且0和1的个数相同
+      return true
+    }
+    last = current
+  }
+  return false
+}
 
-// const countBinarySubstrings = (s) => {
-//   let count = 0
-//   let len = s.length
-//   for (let i = 0; i < len - 1; i++) {
-//     if (matchSubStri(s, i)) {
-//       count++
-//     }
-//   }
-//   return count
-// }
+const countBinarySubstrings = (s) => {
+  let count = 0
+  let len = s.length
+  for (let i = 0; i < len - 1; i++) {
+    if (matchSubStri(s, i)) {
+      count++
+    }
+  }
+  return count
+}
 
 // 思路三:
-// const countBinarySubstrings = (str) => {
-//   // 建立数据结构，堆栈，保存数据
-//   let r = []
-//   // 给定任意子输入都返回第一个符合条件的子串
-//   let match = (str) => {
-//     let j = str.match(/^(0+|1+)/)[0]
-//     let o = (j[0] ^ 1).toString().repeat(j.length)
-//     let reg = new RegExp(`^(${j}${o})`)
-//     if (reg.test(str)) {
-//       return RegExp.$1
-//     } else {
-//       return ''
-//     }
-//   }
-//   // 通过for循环控制程序运行的流程
-//   for (let i = 0, len = str.length - 1; i < len; i++) {
-//     let sub = match(str.slice(i))
-//     if (sub) {
-//       r.push(sub)
-//     }
-//   }
-//   return r.length
-// }
+const countBinarySubstrings = (str) => {
+  // 建立数据结构，堆栈，保存数据
+  let r = []
+  // 给定任意子输入都返回第一个符合条件的子串
+  let match = (str) => {
+    let j = str.match(/^(0+|1+)/)[0]
+    let o = (j[0] ^ 1).toString().repeat(j.length)
+    let reg = new RegExp(`^(${j}${o})`)
+    if (reg.test(str)) {
+      return RegExp.$1
+    } else {
+      return ''
+    }
+  }
+  // 通过for循环控制程序运行的流程
+  for (let i = 0, len = str.length - 1; i < len; i++) {
+    let sub = match(str.slice(i))
+    if (sub) {
+      r.push(sub)
+    }
+  }
+  return r.length
+}
 
 // 新思路:
 // 
@@ -90,30 +90,30 @@
 // 1. 转为连续子串个数形式 e.g. “1111000011010001011”转化为[4, 4, 2, 1, 1, 3, 1, 1, 2] 
 // 2. 相邻元素min求最小值再求和
 
-// const countBinarySubstrings = (s) => {
-//   const resArr = []
-//   let cnt = 0
-//   let last = s.length - 1
-//   // i属于 [0, last-1]
-//   for (let i = 0; i < last; i++) {
-//     cnt++
-//     if (s[i] != s[i + 1]) {
-//       resArr.push(cnt)
-//       cnt = 0
-//     }
-//   }
-//   // 最后一位特殊处理
-//   if (s[last - 1] == s[last]) {
-//     resArr.push(cnt + 1)
-//   } else {
-//     resArr.push(1)
-//   }
-//   let sum = 0
-//   for (let i = 0; i < resArr.length - 1; i++) {
-//     sum += Math.min(resArr[i], resArr[i + 1])
-//   }
-//   return sum
-// }
+const countBinarySubstrings = (s) => {
+  const resArr = []
+  let cnt = 0
+  let last = s.length - 1
+  // i属于 [0, last-1]
+  for (let i = 0; i < last; i++) {
+    cnt++
+    if (s[i] != s[i + 1]) {
+      resArr.push(cnt)
+      cnt = 0
+    }
+  }
+  // 最后一位特殊处理
+  if (s[last - 1] == s[last]) {
+    resArr.push(cnt + 1)
+  } else {
+    resArr.push(1)
+  }
+  let sum = 0
+  for (let i = 0; i < resArr.length - 1; i++) {
+    sum += Math.min(resArr[i], resArr[i + 1])
+  }
+  return sum
+}
 
 // 思路五: 
 // last 上一种连续的个数
